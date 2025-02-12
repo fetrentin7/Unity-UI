@@ -6,19 +6,24 @@ public class Target : MonoBehaviour
     private Rigidbody targetRb;
     private float minSpeed = 12;
     private float maxSpeed = 16;
-    private float maxTorque = 10;
+    private float maxTorque = 5;
     private float xRange = 4.0f;
     private float ySpawnPos = -6.0f;
+    private GameManager gameManager;
 
+    public int pointValue;
 
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
         targetRb = GetComponent<Rigidbody>();
         targetRb.AddForce(RandomForce(), ForceMode.Impulse);
         targetRb.AddTorque(RandomTorque(), Random.Range(-maxTorque, maxTorque), 
             Random.Range(-maxTorque, maxTorque), ForceMode.Impulse);
 
         transform.position = new Vector3(Random.Range(-xRange, xRange), ySpawnPos); //random place for the object to spawn
+        
     }
 
     // Update is called once per frame
@@ -45,6 +50,7 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
+        gameManager.UpdateScore(5);
     }
 
     private void OnTriggerEnter(Collider other)
