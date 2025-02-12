@@ -20,10 +20,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        isGameActive = true;
-        StartCoroutine(SpawnTarget());
-        score = 0;
-        UpdateScore(0);
+
     }
 
     // Update is called once per frame
@@ -58,5 +55,13 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void StartGame()
+    {
+        isGameActive = true;
+        StartCoroutine(SpawnTarget());
+        score = 0;
+        UpdateScore(0);
     }
 }
